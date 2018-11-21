@@ -1,4 +1,4 @@
-`./chrome-extension` provides a button that downloads all the basic cases as `${problemID}.in` and `${problemID}.out`.
+`./chrome-extension` provides a button which the click event downloads all the basic cases as `${problemID}.in` and `${problemID}.out`.
 ![](https://user-images.githubusercontent.com/10692276/48839048-520e6d80-edde-11e8-802c-7c696ade1d1f.png)
 
 -----
