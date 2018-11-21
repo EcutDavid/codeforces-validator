@@ -1,3 +1,4 @@
+// TODO: add flags
 package main
 
 import (
@@ -23,7 +24,6 @@ func main() {
 	filePath, casePrefix := os.Args[1], os.Args[2]
 	inPath, outPath := casePrefix+defaultInSuffix, casePrefix+defaultOutSuffix
 
-	// Read test cases and expected output.
 	in, err := ioutil.ReadFile(inPath)
 	if err != nil {
 		log.Fatal("something wrong with reading", inPath, err)
@@ -41,10 +41,12 @@ func main() {
 	// Validations.
 	for i := 0; i < len(cases); i++ {
 		fmt.Println("Running test case", i+1)
+		fmt.Printf("The input is:\n%s\n", cases[i])
 
 		cmd := exec.Command("go", "run", filePath)
 		cmd.Stdin = strings.NewReader(cases[i])
 		stdResult := bytes.Buffer{}
+		cmd.Stderr = os.Stdout
 		cmd.Stdout = &stdResult
 		if err = cmd.Run(); err != nil {
 			log.Fatal(err)
@@ -63,9 +65,8 @@ func main() {
 
 		if stdResult.String() != results[i] {
 			fmt.Printf("Failed\nexpected result:\n%s\nbut get:\n%s", results[i], stdResult.String())
-			fmt.Println(stdResult.Bytes(), []byte(results[i]))
 		} else {
-			fmt.Println("Passed")
+			fmt.Printf("Passed\n\n")
 		}
 	}
 }
