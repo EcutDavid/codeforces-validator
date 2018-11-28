@@ -52,14 +52,18 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if stdResult.Bytes()[stdResult.Len()-1] == 10 {
-			if len(results[i]) > 0 && results[i][len(results[i])-1] != 10 {
-				results[i] = results[i] + "\n"
+		// Normalization
+		if len(stdResult.Bytes()) > 0 {
+			// New line in ASCII is 10
+			if stdResult.Bytes()[stdResult.Len()-1] == 10 {
+				if len(results[i]) > 0 && results[i][len(results[i])-1] != 10 {
+					results[i] = results[i] + "\n"
+				}
 			}
-		}
-		if stdResult.Bytes()[stdResult.Len()-1] != 10 {
-			if len(results[i]) > 0 && results[i][len(results[i])-1] == 10 {
-				results[i] = results[i][0 : len(results[i])-1]
+			if stdResult.Bytes()[stdResult.Len()-1] != 10 {
+				if len(results[i]) > 0 && results[i][len(results[i])-1] == 10 {
+					results[i] = results[i][0 : len(results[i])-1]
+				}
 			}
 		}
 

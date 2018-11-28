@@ -11,7 +11,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://codeforces.com/contest/*/problem/*"
+        "https://codeforces.com/contest/*/problem/*",
+        "https://codeforces.com/problemset/problem/*"
       ],
       "js": [
         "contentScript.js"
